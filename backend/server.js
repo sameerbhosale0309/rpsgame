@@ -19,15 +19,27 @@ const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/rpsgame';
 const JWT_SECRET = process.env.JWT_SECRET || 'super_secret_rps_jwt_key_2026';
 
-// Middleware
-app.use(cors({ origin: [CLIENT_URL, 'http://localhost:3000', '*'], credentials: true }));
+// Middleware - Dynamic origin reflection to support credentials with any Vercel domain or localhost
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g. mobile apps, curl, server-to-server)
+      if (!origin) return callback(null, true);
+      return callback(null, true);
+    },
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Initialize Socket.IO with CORS
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: (origin, callback) => {
+      callback(null, true);
+    },
     methods: ['GET', 'POST'],
+    credentials: true,
   },
   pingTimeout: 10000,
   pingInterval: 5000,
@@ -39,6 +51,16 @@ registerSocketHandlers(io);
 // -------------------------------------------------------------
 // REST API ROUTES
 // -------------------------------------------------------------
+
+// Root status endpoint (useful for Render awake check and pinging)
+app.get('/', (req, res) => {
+  res.json({
+    status: 'online',
+    service: 'rps-game-backend',
+    message: 'Rock Paper Scissors Game Backend is running smoothly!',
+    timestamp: new Date().toISOString(),
+  });
+});
 
 // Health check
 app.get('/api/health', (req, res) => {
