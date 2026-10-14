@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #121417;
+    color: #e5dfd3;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* CRT Screen Scanline Overlay Effect */
+.crt-screen {
+  position: relative;
+  overflow: hidden;
+  background-color: #08110b;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.9), 0 0 10px rgba(51, 255, 85, 0.2);
+}
+
+.crt-screen::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
+  z-index: 15;
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Phosphor Glow Utilities */
+.glow-green {
+  color: #33ff55;
+  text-shadow: 0 0 8px rgba(51, 255, 85, 0.8), 0 0 16px rgba(51, 255, 85, 0.4);
+}
+
+.glow-amber {
+  color: #ffb000;
+  text-shadow: 0 0 8px rgba(255, 176, 0, 0.8), 0 0 16px rgba(255, 176, 0, 0.4);
+}
+
+.glow-orange {
+  color: #ff6b35;
+  text-shadow: 0 0 8px rgba(255, 107, 53, 0.8), 0 0 16px rgba(255, 107, 53, 0.4);
+}
+
+/* Industrial Hazard Stripes */
+.hazard-stripes {
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffb000,
+    #ffb000 8px,
+    #181b20 8px,
+    #181b20 16px
+  );
+}
+
+.hazard-stripes-subtle {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 176, 0, 0.3),
+    rgba(255, 176, 0, 0.3) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+/* Metallic Screw Head Component */
+.screw {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #6a737d, #252a32);
+  border: 1px solid #13161a;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 1px 2px rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+.screw::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  right: 20%;
+  height: 1.5px;
+  background: #111417;
+  transform: translateY(-50%) rotate(38deg);
+}
+
+/* Mechanical Push Button */
+.btn-tactile {
+  background: linear-gradient(180deg, #383f49 0%, #22272e 100%);
+  border: 1px solid #4a5462;
+  border-bottom-color: #111417;
+  box-shadow: 0 4px 0 #111417, 0 6px 8px rgba(0, 0, 0, 0.7);
+  transition: all 0.08s ease;
+}
+
+.btn-tactile:hover {
+  background: linear-gradient(180deg, #424a56 0%, #282e37 100%);
+}
+
+.btn-tactile:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #111417, inset 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.btn-tactile-orange {
+  background: linear-gradient(180deg, #ff7a45 0%, #d34a10 100%);
+  border: 1px solid #ff9d75;
+  border-bottom-color: #7a2202;
+  box-shadow: 0 4px 0 #7a2202, 0 6px 8px rgba(0, 0, 0, 0.7);
+}
+
+.btn-tactile-orange:hover {
+  background: linear-gradient(180deg, #ff8c5d 0%, #e05419 100%);
+}
+
+.btn-tactile-orange:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #7a2202, inset 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.btn-tactile-green {
+  background: linear-gradient(180deg, #3de05c 0%, #177a2d 100%);
+  border: 1px solid #6ef588;
+  border-bottom-color: #0b3815;
+  box-shadow: 0 4px 0 #0b3815, 0 6px 8px rgba(0, 0, 0, 0.7);
+}
+
+.btn-tactile-green:hover {
+  background: linear-gradient(180deg, #4ef26e 0%, #1e9939 100%);
+}
+
+.btn-tactile-green:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #0b3815, inset 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Custom Scrollbar in Retro Style */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #181b20;
+  border: 1px solid #22272e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffb000;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff6b35;
+}
